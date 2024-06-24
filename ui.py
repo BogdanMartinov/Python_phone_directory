@@ -1,4 +1,4 @@
-from logger import input_data, print_data, update_data, delete_data
+from logger import input_data, print_data, update_data, delete_data, copy_data
 
 def interface():
     print("Добрый день! Вы попали на специальный бот справочник!")
@@ -6,9 +6,10 @@ def interface():
     print("2 - вывод данных")
     print("3 - изменение данных")
     print("4 - удаление данных")
+    print("5 - копирование данных")
     command = int(input('Введите число '))
 
-    while command not in [1, 2, 3, 4]:
+    while command not in [1, 2, 3, 4, 5]:
         print("Неправильный ввод")
         command = int(input('Введите число '))
 
@@ -20,6 +21,8 @@ def interface():
         update_data()
     elif command == 4:
         delete_data()
+    elif command == 5:
+        copy_data()
 
 
 

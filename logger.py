@@ -118,3 +118,52 @@ def delete_data():
         f.writelines(data)
 
     print('Запись успешно удалена')
+
+
+def copy_data():
+    print("Из какого файла скопировать запись?")
+    print("1 - Из первого файла")
+    print("2 - Из второго файла")
+    file_number = int(input('Введите число '))
+
+    while file_number != 1 and file_number != 2:
+        print("Неправильный ввод")
+        file_number = int(input('Введите число '))
+
+    if file_number == 1:
+        source_file = 'data_first_variant.csv'
+    else:
+        source_file = 'data_second_variant.csv'
+
+    with open(source_file, 'r', encoding='utf-8') as f:
+        data = f.readlines()
+
+    print('Доступные записи:')
+    for i, line in enumerate(data):
+        if line != '\n':
+            print(f'{i+1}. {line.strip()}')
+
+    record_number = int(input('Введите номер записи, которую вы хотите скопировать: '))
+
+    if record_number < 1 or record_number > len(data) or data[record_number-1] == '\n':
+        print('Неправильный номер записи')
+        return
+
+    print("В какой файл скопировать запись?")
+    print("1 - В первый файл")
+    print("2 - Во второй файл")
+    destination_file_number = int(input('Введите число '))
+
+    while destination_file_number != 1 and destination_file_number != 2:
+        print("Неправильный ввод")
+        destination_file_number = int(input('Введите число '))
+
+    if destination_file_number == 1:
+        destination_file = 'data_first_variant.csv'
+    else:
+        destination_file = 'data_second_variant.csv'
+
+    with open(destination_file, 'a', encoding='utf-8') as dest:
+        dest.write('\n' + data[record_number-1])
+
+    print('Запись успешно скопирована')
