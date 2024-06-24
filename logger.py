@@ -21,7 +21,7 @@ def input_data():
         with open('data_first_variant.csv', 'a', encoding='utf-8') as f:
             f.write(f"{name}\n{surname}\n{phone}\n{address}\n\n")
     if var == 2:
-        with open('data_first_variant.csv', 'a', encoding='utf-8') as f:
+        with open('data_second_variant.csv', 'a', encoding='utf-8') as f:
             f.write(f"{name};{surname};{phone};{address}\n\n")
 
 def print_data():
@@ -45,7 +45,21 @@ def print_data():
 
 
 def update_data():
-    with open('data_first_variant.csv', 'r', encoding='utf-8') as f:
+    print("В каком файле внести изменения?")
+    print("1 - Первый файл")
+    print("2 - Второй файл")
+    file_number = int(input('Введите число '))
+
+    while file_number != 1 and file_number != 2:
+        print("Неправильный ввод")
+        file_number = int(input('Введите число '))
+
+    if file_number == 1:
+        file_name = 'data_first_variant.csv'
+    else:
+        file_name = 'data_second_variant.csv'
+
+    with open(file_name, 'r', encoding='utf-8') as f:
         data = f.readlines()
 
     print('Доступные записи:')
@@ -63,14 +77,28 @@ def update_data():
 
     data[record_number-1] = new_data + '\n'
 
-    with open('data_first_variant.csv', 'w', encoding='utf-8') as f:
+    with open(file_name, 'w', encoding='utf-8') as f:
         f.writelines(data)
 
     print('Данные успешно изменены')
 
 
 def delete_data():
-    with open('data_first_variant.csv', 'r', encoding='utf-8') as f:
+    print("Из какого файла удалить запись?")
+    print("1 - Первый файл")
+    print("2 - Второй файл")
+    file_number = int(input('Введите число '))
+
+    while file_number != 1 and file_number != 2:
+        print("Неправильный ввод")
+        file_number = int(input('Введите число '))
+
+    if file_number == 1:
+        file_name = 'data_first_variant.csv'
+    else:
+        file_name = 'data_second_variant.csv'
+
+    with open(file_name, 'r', encoding='utf-8') as f:
         data = f.readlines()
 
     print('Доступные записи:')
@@ -86,7 +114,7 @@ def delete_data():
 
     data.pop(record_number-1)
 
-    with open('data_first_variant.csv', 'w', encoding='utf-8') as f:
+    with open(file_name, 'w', encoding='utf-8') as f:
         f.writelines(data)
 
     print('Запись успешно удалена')
